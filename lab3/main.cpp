@@ -22,15 +22,7 @@ int main(void)
 
 	do
 	{
-		// 输出系统菜单
-		cout << "=====景区信息管理系统=====" << endl;
-		cout << "*    1.创建景区景点图    *" << endl;
-		cout << "*    2.查询景点信息      *" << endl;
-		cout << "*    3.旅游景点导航      *" << endl;
-		cout << "*    4.搜索最短路径      *" << endl;
-		cout << "*    5.铺设电路规划      *" << endl;
-		cout << "*    0.退出              *" << endl;
-		cout << "==========================" << endl;
+		
 
 		// 用户选择功能
 		cout << "请输入菜单项编号(0-5):";
@@ -43,16 +35,16 @@ int main(void)
 			CreateGraph();
 			break;
 		case 2:
-			GetSpotInfo(3);
+			cout<<GetSpotInfo(3)<<endl;
 			break;
 		case 3:
 			//TravelPath();
 			break;
 		case 4:
-			FindShortPath(1,5);
+			cout<<FindShortPath(1,5)<<endl;
 			break;
 		case 5:
-			DesignPath();
+			cout << DesignPath() << endl;
 			break;
 		case 0:
 			cout << "谢谢您使用本系统！" << endl;

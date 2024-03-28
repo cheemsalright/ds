@@ -16,80 +16,52 @@ extern Graph m_Graph;
 // 参数：void
 // 返回值：void
 // 功能：实现从Vex.txt文件中读取景点信息并输出
-void LoadVex(void)
-{
-	ifstream VexFile("Vex.txt");
-	if (!VexFile)
-	{
-		cout << "Vex.txt文件打开失败，请检查！" << endl;
-		return;
+void LoadVex() {
+	// 定义景点信息数组
+	Vex vexArray[] = {
+		{0, "A区", "风景优美，气候宜人。门票10元。"},
+		{1, "B区", "风景优美，气候宜人。门票20元。"},
+		{2, "C区", "风景优美，气候宜人。门票30元。"},
+		{3, "D区", "风景优美，气候宜人。门票40元。"},
+		{4, "E区", "风景优美，气候宜人。门票50元。"},
+		{5, "F区", "风景优美，气候宜人。门票60元。"},
+		{6, "G区", "风景优美，气候宜人。门票70元。"}
+	};
+
+	// 遍历景点信息数组，并将每个景点信息插入到图中
+	for (const auto& vex : vexArray) {
+		//cout << vex.num << "-" << vex.name << endl;
+		InsertVex(vex); // 假设 InsertVex 函数可以将景点信息插入到图中
 	}
-
-	// 暂存从Vex.txt读取到的一行数据
-	char num[2];
-	char name[20];
-	char desc[1024];
-	Vex sVex;
-
-	// 逐行读取Vex.txt中的数据
-	VexFile.getline(num, 2); // 将第一行的数据读出丢掉
-
-	//cout << "景区数目：" << atoi(num) << endl;
-	//cout << "-----顶点-----" << endl;
-	// 将顶点信息保存到顶点数组中
-	while (VexFile.getline(num, 2))
-	{
-		sVex.num = atoi(num);
-		VexFile.getline(name, 20);
-		strcpy(sVex.name, name);
-		VexFile.getline(desc, 1024);
-		strcpy(sVex.desc, desc);
-
-		// 将顶点信息输出
-		cout << sVex.num << "-" << sVex.name << endl;
-
-		// 设置图的顶点
-		if (!InsertVex(sVex))
-		{
-			//cout << "新增景点失败！" << endl;
-			continue;
-		}
-	}
-	//cout << "------------" << endl;
-	VexFile.close();
 }
+
 
 // 函数名：LoadPath
 // 参数：void
 // 返回值：void
 // 功能：实现从Edge.txt文件中读取路径信息并输出
-void LoadPath()
-{
-	ifstream EdgeFile("Edge.txt");
-	if (!EdgeFile)
-	{
-		//cout << "Edge.txt文件打开失败，请检查！" << endl;
-		return;
-	}
+void LoadPath() {
+	// 定义路径信息数组
+	Edge edgeArray[] = {
+		{0, 2, 700},
+		{0, 4, 1000},
+		{0, 5, 600},
+		{1, 2, 1000},
+		{1, 6, 1000},
+		{2, 3, 400},
+		{3, 4, 300},
+		{3, 6, 400},
+		{4, 5, 600},
+		{5, 6, 500}
+	};
 
-	Edge edge;
-	//cout << "------边------" << endl;
-	while (EdgeFile)
-	{
-		EdgeFile >> edge.vex1 >> edge.vex2 >> edge.weight;
-		//cout << "<" << edge.vex1 << "," << edge.vex2 << ">   " << edge.weight << endl;
-
-		// 设置图的边
-		if (!InsertEdge(edge))
-		{
-			//cout << "新增路径信息失败！" << endl;
-			continue;
-		}
+	// 遍历路径信息数组，并将每个路径信息插入到图中
+	for (const auto& edge : edgeArray) {
+		cout << "<" << edge.vex1 << "," << edge.vex2 << ">   " << edge.weight << endl;
+		InsertEdge(edge); // 假设 InsertEdge 函数可以将路径信息插入到图中
 	}
-	//cout << "-------------" << endl;
-	EdgeFile.close();
-	//cout << "======================" << endl;
 }
+
 
 // 函数名:CreateGraph
 // 参数：void
@@ -277,7 +249,7 @@ std::string DesignPath() {
 		nAllLength += aPath[i].weight;
 	}
 
-	oss << nAllLength; // Appending the total length at the end
+	oss << nAllLength<<"米"; // Appending the total length at the end
 
 	return oss.str();
 }
